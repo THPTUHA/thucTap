@@ -46,3 +46,5 @@ explain select b.name , v.name from books b, videos v, indexing i where b.id = i
 
 explain select v.name ,count(r.videoId) as number_use from RLessonVideo r, videos v where r.videoId = v.id
 group by (r.videoId) having number_use >1;
+
+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
