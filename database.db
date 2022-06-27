@@ -1,0 +1,48 @@
+create table if not exists books(
+	id int auto_increment key,
+    name varchar(255)
+)engine=INNODB;
+
+create table if not exists chapters(
+	id int auto_increment key,
+    name varchar(255),
+    bookId int not null,
+    FOREIGN KEY(bookId) REFERENCES books(id) ON DELETE CASCADE
+)engine=INNODB;
+
+
+create table if not exists lessons(
+	id int auto_increment key,
+    name varchar(255),
+    chapterId int not null,
+    FOREIGN KEY(chapterId) REFERENCES chapters(id) ON DELETE CASCADE
+)engine=INNODB;
+
+create table if not exists videos(
+	id int auto_increment key,
+    name varchar(255),
+    link varchar(255)
+)engine=INNODB;
+
+create table if not exists RLessonVideo(
+	id int auto_increment key,
+    videoId int not null,
+    lessonId int not null,
+    position int not null,
+    FOREIGN KEY(videoId) REFERENCES videos(id) ON DELETE CASCADE,
+    FOREIGN KEY(lessonId) REFERENCES lessons(id) ON DELETE CASCADE
+)engine=INNODB;
+
+
+create table if not exists indexing(
+	id int auto_increment key,
+    position int not null,
+    bookId int,
+    chapterId int,
+    videoId int,
+    lessonId int,
+    FOREIGN KEY(bookId) REFERENCES books(id) ON DELETE CASCADE,
+    FOREIGN KEY(chapterId) REFERENCES chapters(id) ON DELETE CASCADE,
+    FOREIGN KEY(videoId) REFERENCES videos(id) ON DELETE CASCADE,
+    FOREIGN KEY(lessonId) REFERENCES lessons(id) ON DELETE CASCADE
+)engine=INNODB;

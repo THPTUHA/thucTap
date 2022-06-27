@@ -1,0 +1,48 @@
+1.SET GLOBAL local_infile=1; 
+2.quit
+3. mysql --local-infile=1 -u root -p
+
+
+
+rest client
+load data local infile "C:\\Users\\Dell\\OneDrive\\Documents\\js\\video.txt" into table videos FIELDS TERMINATED BY '#@#' LINES TERMINATED BY '\r\n' ;
+select b.name , v.name, r.position from books b, chapters c, videos v, lessons l , RLessonVideo r
+
+
+where b.id = c.bookId and c.id = l.chapterId and l.id = r.lessonId  and r.videoId = v.id 
+order by b.name asc,r.position asc;
+
+explain select b.name , r.position from books b, chapters c,  lessons l , RLessonVideo r
+where b.id = c.bookId and c.id = l.chapterId and r.lessonId = l.id  and b.id = 1
+order by r.position asc;
+
+explain select position from RLessonVideo where lessonId = 10 and videoId = 5;
+
+
+
+
+explain select b.name , v.name, r.position from books b, chapters c, videos v, lessons l , RLessonVideo r
+where b.id = c.bookId and c.id = l.chapterId and l.id = r.lessonId  and r.videoId = v.id 
+order by b.name asc,r.position asc;
+
+
+explain select n.name, v.name from  (select * from books where books.id = 5)as n,chapters c, videos v, lessons l , RLessonVideo r
+where n.id = c.bookId and c.id = l.chapterId and l.id = r.lessonId  and v.id  = r.videoId
+order by r.position asc;
+
+
+explain select v.name, temp.name from  videos v,(select n.name as name, r.videoId as videoId from  (select * from books where books.id = 5)as n,chapters c,lessons l , RLessonVideo r
+where n.id = c.bookId and c.id = l.chapterId and l.id = r.lessonId 
+order by r.position asc) as temp  where v.id = temp.videoId;
+
+explain select * from RLessonVideo r , videos v,lessons l where r.videoId = v.id and l.id = r.lessonId and v.id =10;
+
+select b.name , v.name from books b, videos v, indexing i where b.id = i.bookId and i.id = v.id order by b.name asc, i.position asc;
+
+explain select b.name , v.name from books b, videos v, indexing i where b.id = i.bookId and i.id = v.id and b.id = 5 order by b.name asc, i.position asc;
+
+explain select b.name , v.name from books b, videos v, indexing i where b.id = i.bookId and i.id = v.id and v.id > 5 order by b.name asc, i.position asc;
+
+
+explain select v.name ,count(r.videoId) as number_use from RLessonVideo r, videos v where r.videoId = v.id
+group by (r.videoId) having number_use >1;
