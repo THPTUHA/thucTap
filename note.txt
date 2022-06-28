@@ -1,6 +1,0 @@
-Ứng dụng hoàn chỉnh .Thiết kế giao diện.
-Có cần xác thực.
-Quan hệ giữa chương , sách , bài
-Ý 5 có vấn đề
-Ý 3 có cần tạo api để upload video .
-

@@ -1,4 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
+import { BookModel } from '../models/book/Book';
+import { ChapterModel } from '../models/chapter/Chapter';
+import { LessonModel } from '../models/lesson/Lesson';
+import { RLessonVideo } from '../models/rLessonVideo/RLessonVideo';
 import { VideoModel } from '../models/video/Video';
 
 export default () => {
@@ -9,7 +13,11 @@ export default () => {
         username: process.env.DATABASE_USER,
         password: process.env.DATABASE_PASSWORD,
         models: [
-           VideoModel
+           VideoModel,
+           BookModel,
+           LessonModel,
+           RLessonVideo,
+           ChapterModel
         ]
     });
     return sequelize;

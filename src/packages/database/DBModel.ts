@@ -1,5 +1,4 @@
 import { Model } from 'sequelize-typescript';
-import {Op} from 'sequelize';
 
 export class DBModel extends Model {
 

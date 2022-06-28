@@ -1,6 +1,31 @@
-POST http://localhost:3001/api/test
-Content-Type: application/json
+# GET http://localhost:3001/api/bookVideo
+# Content-Type: application/json
 
-{
-   "name" : "C"
-}
+
+# POST http://localhost:3001/api/addVideo
+# Content-Type: application/json
+
+# {
+#    "lessonId": 5,
+#    "videoId": 10
+# }
+
+# POST http://localhost:3001/api/addVideo
+# Content-Type: application/json
+
+# {
+#    "lessonId": 5,
+#    "videoName": "test",
+#    "videoLink": "test"
+# }
+
+# GET http://localhost:3001/api/repeatVideo
+# Content-Type: application/json
+
+
+# POST http://localhost:3001/api/deleteChapter
+# Content-Type: application/json
+
+# {
+#    "chapterId": 10
+# }

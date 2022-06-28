@@ -29,11 +29,16 @@ create table if not exists RLessonVideo(
     videoId int not null,
     lessonId int not null,
     position int not null,
+    hashKey varchar(255),
     FOREIGN KEY(videoId) REFERENCES videos(id) ON DELETE CASCADE,
     FOREIGN KEY(lessonId) REFERENCES lessons(id) ON DELETE CASCADE
 )engine=INNODB;
+create unique index hashKey on RLessonVideo(hashKey);
 
 
+
+
+///////////////----------------------/////
 create table if not exists indexing(
 	id int auto_increment key,
     position int not null,

@@ -7,7 +7,7 @@ import { DBModel } from "../../packages/database/DBModel";
     timestamps: false
 })
 
-export class LessonModel extends DBModel{
+export class RLessonVideo extends DBModel{
     @PrimaryKey
     @Column
     id: number;
@@ -17,6 +17,8 @@ export class LessonModel extends DBModel{
     videoId: number;
     @Column
     lessonId: number;
+    @Column
+    position: number;
 
 
     release(){
@@ -24,6 +26,7 @@ export class LessonModel extends DBModel{
             id: this.id,
             name: this.name,
             videoId: this.videoId,
+            position: this.position,
             lessonId: this.lessonId
         }
     }

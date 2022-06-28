@@ -1,9 +1,15 @@
 import { Router } from 'express';
-import test from './routes/test';
+import addVideo from './routes/addVideo/addVideo';
+import bookVideo from './routes/bookVideo/bookVideo';
+import deleteChapter from './routes/deleteChapter/deleteChapter';
+import repeatVideo from './routes/repeateVideo/repeatVideo';
 
 
 export default () => {
     const app = Router();
-    test(app);
+    bookVideo(app);
+    addVideo(app);
+    repeatVideo(app);
+    deleteChapter(app);
     return app;
 };

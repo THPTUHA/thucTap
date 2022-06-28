@@ -1,40 +1,16 @@
 import { Router } from 'express';
 import { BookModel } from '../../../models/book/Book';
-import { ChapterModel } from '../../../models/chapter/Chapter';
-import { LessonModel } from '../../../models/lesson/Lesson';
-import { VideoModel } from '../../../models/video/Video';
 import BaseError from '../../../packages/baseError/BaseError';
 
 export default (router: Router) => {
-    router.post("/bookVideo",  
-        async(req, res)=>{
-            const {name} = req.body;
-
-            if(!name){
-                return res.status(200).send(new BaseError("Name empty!", BaseError.Code.ERROR).release());
-            }
-
-            const books = await BookModel.findAll();
-            const bookIds = books.map(book => book.id);
-            const chapters = await ChapterModel.findAll({
-                where:{
-                    id: bookIds
-                }
-            })
-
-            const lessons = await LessonModel.findAll({
-                where:{
-                    id: chapters.map(chapter => chapter.id)
-                }
-            })
-
-            
-
-            const videos = await VideoModel.find(['name','id']);
-            
+    router.get("/bookVideo",  
+        async(req, res)=>{            
             try {
+                console.time('test');
+                const result = await BookModel.getBookVideo();
+                console.timeEnd('test');
                 return res.status(200).send({
-                    video: videos.map(video => video.release()),
+                    result,
                     code: BaseError.Code.SUCCESS
                 });
             } catch (error) {

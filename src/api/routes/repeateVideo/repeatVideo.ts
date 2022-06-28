@@ -3,19 +3,16 @@ import { VideoModel } from '../../../models/video/Video';
 import BaseError from '../../../packages/baseError/BaseError';
 
 export default (router: Router) => {
-    router.post("/test",  
-        async(req, res)=>{
-            const {name} = req.body;
-
-            if(!name){
-                return res.status(200).send(new BaseError("Name empty!", BaseError.Code.ERROR).release());
-            }
-
-            const videos = await VideoModel.find(['name','id']);
-            
+    router.get("/repeatVideo",  
+        async(req, res)=>{            
             try {
+                console.time('test');
+                const result = await VideoModel.repeat();
+                // const result = await VideoModel.repeatOther();
+                console.timeEnd('test');
+
                 return res.status(200).send({
-                    video: videos.map(video => video.release()),
+                    result: result,
                     code: BaseError.Code.SUCCESS
                 });
             } catch (error) {
