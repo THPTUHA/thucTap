@@ -7,7 +7,8 @@ export default (router: Router) => {
         async(req, res)=>{            
             try {
                 console.time('test');
-                const result = await VideoModel.repeat();
+                // const result = await VideoModel.repeat();
+                const result = await VideoModel.repeatOther2();
                 // const result = await VideoModel.repeatOther();
                 console.timeEnd('test');
 

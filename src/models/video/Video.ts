@@ -47,6 +47,21 @@ export class VideoModel extends DBModel{
         return answer;
     }
 
+    static async repeatOther2() {
+        const result = await this.sequelize.query(`select v.name, n.numberRepeat from 
+        (select r.videoId ,count(r.videoId) as numberRepeat from RLessonVideo r 
+                group by (r.videoId) having numberRepeat >1 ) as n , videos v
+        where v.id = n.videoId;`,{ type: QueryTypes.SELECT }) as VideoRepeat[];
+       
+        
+        const answer = {};
+        for(const item of result){
+            answer[item.name] =  item.numberRepeat;
+        }
+
+        return answer;
+    }
+    
     static async repeatOther() {
         const videos = await VideoModel.find(["id","name"]);
         const result = {};
